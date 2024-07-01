@@ -1,4 +1,4 @@
-import { parseImports, Import } from "npm:parse-imports";
+import { parseImports } from "npm:parse-imports";
 import DependencyError from "../common/error.ts";
 import { walkDirectory } from "../common/file.ts";
 

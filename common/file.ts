@@ -17,37 +17,42 @@ export async function globDirectory(
             continue;
         }
         count++;
-        const xdependencies = dependencies.map((dependency: string): string =>
-            mapDependency(globEntry.path, dir, dependency)
+        const expandedDependencies = dependencies.map((dependency: string): string =>
+            expandDependency(globEntry.path, dir, dependency)
         );
-        await callback(globEntry.path, xdependencies);
+        await callback(globEntry.path, expandedDependencies);
     }
     if (count < 1)
         throw new DependencyError(`globbed directory "${dir}" does not exist`);
 }
 
-export function mapDependency(
-    globbedPath: string,
+export function expandDependency(
+    globPath: string,
     globPattern: string,
     dependency: string,
 ): string {
-    if (countChars(globPattern, "*") < countChars(dependency, "*")) {
-        throw new DependencyError(
-            `glob pattern "${globPattern}" is not a valid dependency pattern`,
-        );
-    }
-    globPattern = globPattern.replace(/\*/g, "([^\/]+)");
-    const matches = (new RegExp(globPattern)).exec(globbedPath);
-    if (!matches) return dependency;
-    matches.shift();
-    while (matches.length > 0 && dependency.includes("*")) {
-        dependency = dependency.replace(/\*/, matches.shift() as string);
-    }
-    return dependency;
+    const globsInDependency = countGlobs(dependency);
+    const globsInGlobPattern = countGlobs(globPattern);
+    if (!globsInDependency|| !globsInGlobPattern)
+        return dependency;
+    if (globsInGlobPattern < globsInDependency)
+        throw new Error(`${dependency} contains to many globs *`);
+    const valuePattern = globPattern.replace(/\*/g, "([^\/]+)");
+    const globValues = new RegExp(valuePattern).exec(globPath) ?? [];
+    globValues.shift();
+    return replaceGlobs(dependency, globValues);
 }
 
-function countChars(str: string, char: string) {
-    return str.split(char).length - 1;
+function replaceGlobs(path: string, globs: string[]): string {
+    let result = path;
+    while (globs.length > 0 && result.includes("*")) {
+        result = result.replace(/\*/, globs.shift() as string);
+    }
+    return result;
+}
+
+function countGlobs(str: string) {
+    return str.split("*").length - 1;
 }
 
 export async function walkDirectory(

@@ -2,13 +2,17 @@ import { describe, it } from "https://deno.land/std@0.196.0/testing/bdd.ts";
 import { assert } from "https://deno.land/std@0.196.0/assert/mod.ts";
 import { directoryDependsOn } from "../rules/local.ts";
 
-describe("layer policy", async () => {
-  it("domains are self containing", async () => {
+describe("test the layer policy within ddd domains", async () => {
+  it("domains are closed", async () => {
     assert(
-      await directoryDependsOn("./test/ddd/*", "./test/ddd/common")
+      await directoryDependsOn(
+        "./test/ddd/*",
+        "./test/ddd/common"
+      )
     );
   });
-  it("models are self containing", async () => {
+  
+  it("models are closed", async () => {
     assert(
       await directoryDependsOn(
         "./test/ddd/*/domain/model",
@@ -16,7 +20,8 @@ describe("layer policy", async () => {
       )
     );
   });
-  it("application layers depends on almost everything", async () => {
+  
+  it("application layers are allowed to access almost everything in their domain", async () => {
     assert(
       await directoryDependsOn(
         "./test/ddd/*/application",
@@ -26,10 +31,12 @@ describe("layer policy", async () => {
       )
     );
   });
-  it("infrastructure depends on the model", async () => {
+  
+  it("infrastructure layers are allowed to access its model", async () => {
     assert(
       await directoryDependsOn(
         "./test/ddd/*/infrastructure",
+        "./test/ddd/*.config.ts",
         "./test/ddd/*/domain/model",
         "./test/ddd/common/domain/model",
         "./test/ddd/common/infrastructure",

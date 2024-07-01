@@ -46,7 +46,7 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
       throw new DependencyError(`any imported resource is forbidden`);
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dependency of dependencies) {
-        const specifierPath = await realPathFrom(directory, specifier);
+      const specifierPath = await realPathFrom(directory, specifier);
         const dependencyPath = await realPathFrom(dependency);
         if (specifierPath.startsWith(dependencyPath))
           throw new DependencyError(`imported resource "${specifier}" in file "${path}" is forbidden`);
