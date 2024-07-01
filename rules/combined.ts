@@ -1,5 +1,5 @@
-import { directoryDependsOn as directoryDependsOnLocal } from "./local.ts";
-import { directoryDependsOn as directoryDependsOn3dParty } from "./3d-party.ts";
+import { directoryDependsOn as directoryDependsOnLocal } from "./layer.ts";
+import { directoryDependsOn as directoryDependsOn3dParty } from "./software.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   const local = dependencies.filter((dependency) => isRelativePath(dependency));

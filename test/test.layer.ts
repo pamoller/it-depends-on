@@ -1,6 +1,6 @@
 import { describe, it } from "https://deno.land/std@0.196.0/testing/bdd.ts";
 import { assert } from "https://deno.land/std@0.196.0/assert/mod.ts";
-import { directoryDependsOn } from "../rules/local.ts";
+import { directoryDependsOn } from "../rules/layer.ts";
 
 describe("test the layer policy within ddd domains", async () => {
   it("domains are closed", async () => {
