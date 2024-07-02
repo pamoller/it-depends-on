@@ -1,1 +1,0 @@
-import couchedb from "npm:couchedb";

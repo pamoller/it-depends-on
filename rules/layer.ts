@@ -4,9 +4,9 @@ import { dirname } from "../common/file.ts";
 import * as walk from "../common/walk.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await walk.onExpansion(dir, async (directory: string, xdependencies: string[] ) => {
-    const extended = [directory, ...xdependencies];
-    await walk.onDir(directory, (path: string) => fileDependsOn(path, ...extended));
+  await walk.onExpansion(dir, async (dir: string, xdependencies: string[] ) => {
+    const extended = [dir, ...xdependencies];
+    await walk.onDir(dir, (path: string) => fileDependsOn(path, ...extended));
   }, dependencies);
   return true;
 }
@@ -14,16 +14,16 @@ export async function directoryDependsOn(dir: string, ...dependencies: string[])
 
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
-  const directory = dirname(path);
+  const dir = dirname(path);
   specifier:
   for (const $import of await parseImports(code)) {
     if ($import.moduleSpecifier.type !== "relative") 
       continue specifier 
     const specifier = $import.moduleSpecifier.value ?? "";
-    for (const dependency of dependencies) {
-      const specifierPath = await realPathFrom(directory, specifier);
-      const dependencyPath = await realPathFrom(dependency);
-      if (specifierPath.startsWith(dependencyPath))
+    for (const dep of dependencies) {
+      const specifierPath = await realPathFrom(dir, specifier);
+      const depPath = await realPathFrom(dep);
+      if (specifierPath.startsWith(depPath))
         continue specifier
     }
     throw new DependencyError(`imported resource "${specifier}" in file "${path}" is a not registered specifier, allowed are: ${dependencies.join(", ")}`);
@@ -31,16 +31,16 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
   return true; 
 }
 
-export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await walk.onExpansion(dir, async (directory: string, xdependencies: string[] ) => {
-    await walk.onDir(directory, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
+export async function dirDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
+  await walk.onExpansion(dir, async (dir: string, xdependencies: string[] ) => {
+    await walk.onDir(dir, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
   }, dependencies);
   return true;
 }
 
 export async function fileDoesNotDependOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
-  const directory = dirname(path);
+  const dir = dirname(path);
   specifier:
   for (const $import of await parseImports(code)) {
     if ($import.moduleSpecifier.type !== "relative") 
@@ -48,10 +48,10 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
     if (dependencies.length === 0)
       throw new DependencyError(`any imported resource is forbidden`);
     const specifier = $import.moduleSpecifier.value ?? "";
-    for (const dependency of dependencies) {
-      const specifierPath = await realPathFrom(directory, specifier);
-        const dependencyPath = await realPathFrom(dependency);
-        if (specifierPath.startsWith(dependencyPath))
+    for (const dep of dependencies) {
+      const specifierPath = await realPathFrom(dir, specifier);
+        const depPath = await realPathFrom(dep);
+        if (specifierPath.startsWith(depPath))
           throw new DependencyError(`imported resource "${specifier}" in file "${path}" is forbidden`);
       }
   }

@@ -267,6 +267,7 @@
     "https://deno.land/std@0.224.0/path/windows/normalize.ts": "78126170ab917f0ca355a9af9e65ad6bfa5be14d574c5fb09bb1920f52577780",
     "https://deno.land/std@0.224.0/path/windows/normalize_glob.ts": "9c87a829b6c0f445d03b3ecadc14492e2864c3ebb966f4cea41e98326e4435c6",
     "https://deno.land/std@0.224.0/path/windows/resolve.ts": "8dae1dadfed9d46ff46cc337c9525c0c7d959fb400a6308f34595c45bdca1972",
+    "https://deno.land/std@0.224.0/regexp/escape.ts": "57303d6c9c6aa058d9a79a3c70113c545391639a87e9a18428220c1bad407549",
     "https://deno.land/std@0.55.0/fmt/colors.ts": "06444b6ebc3842a4b2340d804bfa81fc5452a03513cbb81bd7f6bf8f4b8f3ac4",
     "https://deno.land/std@0.55.0/testing/asserts.ts": "4133876642e3a8b79c0b350104e8c88d2cc7c5f1ab3ae1a7b0bee21674634c5b",
     "https://deno.land/std@0.55.0/testing/diff.ts": "77338e2b479626c096278d7b4a95f750753ee39558f314db6b794e8d8a98d515"

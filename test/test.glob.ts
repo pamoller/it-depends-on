@@ -6,7 +6,7 @@ import { replace, match } from "../common/glob.ts";
 import { assertThrows } from "https://deno.land/std@0.55.0/testing/asserts.ts";
 
 describe("test common functionality", () => {
-  it("expand dependency", async () => {
+  it("expand dep", async () => {
     assertEquals(replaceFrom("test", "test", "foo"), "foo");
     assertEquals(replaceFrom("test/bar", "test/*", "foo"), "foo");
     assertEquals(replaceFrom("test/bar", "test/*", "foo/*"), "foo/bar");

@@ -1,5 +1,7 @@
-export function match(string: string, pattern: string): string[] {
-    const regexp = pattern.replace(/\*/g, "([^\/]+)");
+import { escape } from "https://deno.land/std@0.224.0/regexp/escape.ts";
+
+export function match(string: string, pattern: string, path= true): string[] {
+    const regexp = (escape(pattern)).replace(/(?:\\\*)/g, path?"([^\/]*)":"(.*?)");
     const result = new RegExp(regexp).exec(string) ?? [];
     result.shift();
     return result;
@@ -20,4 +22,8 @@ export function replace(string: string, globs: string[]): string {
 
 function countGlobs(str: string) {
     return str.split("*").length - 1;
+}
+
+export function globs(string: string, pattern: string, path=true): boolean {
+    return "input" in match(string, pattern, path);
 }

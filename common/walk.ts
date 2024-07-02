@@ -27,7 +27,7 @@ export async function onGlob(
         await callback(globEntry.path);
     }
     if (count < 1)
-        throw new DependencyError(`globbed directory "${glob}" does not exist`);
+        throw new DependencyError(`globbed dir "${glob}" does not exist`);
 }
 
 
@@ -48,5 +48,5 @@ export async function onExpansion(
         await callback(globEntry.path, expanded);
     }
     if (count < 1)
-        throw new DependencyError(`globbed directory "${glob}" does not exist`);
+        throw new DependencyError(`globbed dir "${glob}" does not exist`);
 }
