@@ -1,6 +1,6 @@
 import { walk} from "https://deno.land/std@0.170.0/fs/walk.ts";
 import { expandGlob } from "https://deno.land/std@0.224.0/fs/expand_glob.ts";
-import { replace, match} from "./glob.ts";
+import { replace, matchOnPath} from "./glob.ts";
 import { DependencyError }from "./error.ts";
 
 export async function onDir(
@@ -43,7 +43,7 @@ export async function onExpansion(
         }
         count++;
         const expanded = dependencies.map((string: string): string =>
-            replace(string, match(globEntry.path, glob))
+            replace(string, matchOnPath(globEntry.path, glob))
         );
         await callback(globEntry.path, expanded);
     }

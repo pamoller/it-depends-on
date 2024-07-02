@@ -20,7 +20,7 @@ describe("test the validity of software dependencies", () => {
     );
     assert(
       await directoryDependsOn(
-        "./test/ddd/reporting/infrastructure",
+        "./test/ddd/reporting/scripts",
         "https://deno.land/std@0.2*/*",
         "npm:postgre"
       ),

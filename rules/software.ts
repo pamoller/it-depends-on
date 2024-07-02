@@ -1,7 +1,7 @@
 import { parseImports } from "npm:parse-imports";
 import { DependencyError } from "../common/error.ts";
 import * as walk from "../common/walk.ts";
-import { globs, replace } from "../common/glob.ts";
+import { globs } from "../common/glob.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   if (dependencies.length === 0)
@@ -21,7 +21,7 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
     if (type === "relative")
       continue specifier
     for (const dep of dependencies) {
-        if (globs(specifier, dep, false))
+        if (globs(specifier, dep))
           continue specifier
     }
     throw new DependencyError(`imported resource "${specifier}" in file "${path}" is a not registered specifier, allowed are: ${dependencies.join(", ")}`);
@@ -47,7 +47,7 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
     if (dependencies.length === 0)
       throw new DependencyError(`any imported resource is forbidden`);
     for (const dep of dependencies) {
-        if (globs(specifier, dep, false))
+        if (globs(specifier, dep))
           throw new DependencyError(`imported resource "${specifier}" in file "${path}" is forbidden`);
     }
   }

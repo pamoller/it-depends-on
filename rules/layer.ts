@@ -5,13 +5,11 @@ import * as walk from "../common/walk.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   await walk.onExpansion(dir, async (dir: string, xdependencies: string[] ) => {
-    console.log(dir, xdependencies);  
     const extended = [dir, ...xdependencies];
     await walk.onDir(dir, (path: string) => fileDependsOn(path, ...extended));
   }, dependencies);
   return true;
 }
-
 
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);

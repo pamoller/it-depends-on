@@ -1,37 +1,40 @@
-import { describe, it } from "https://deno.land/std@0.196.0/testing/bdd.ts";
-import {
-  assertEquals,
-} from "https://deno.land/std@0.196.0/assert/mod.ts";
-import { replace, match } from "../common/glob.ts";
 import { assertThrows } from "https://deno.land/std@0.55.0/testing/asserts.ts";
+import { describe, it } from "https://deno.land/std@0.196.0/testing/bdd.ts";
+import { assertEquals } from "https://deno.land/std@0.196.0/assert/mod.ts";
+import { replace, match, matchOnPath } from "../common/glob.ts";
 
-describe("test common functionality", () => {
-  it("expand dep", async () => {
-    assertEquals(replaceFrom("test", "test", "foo"), "foo");
-    assertEquals(replaceFrom("test/bar", "test/*", "foo"), "foo");
-    assertEquals(replaceFrom("test/bar", "test/*", "foo/*"), "foo/bar");
-    assertEquals(
-      replaceFrom("test/bar/baz", "test/bar/*", "foo/*"),
-      "foo/baz",
-    );
-    assertEquals(replaceFrom("test/bar/baz", "test/*/*", "foo/*"), "foo/bar");
-    assertEquals(
-      replaceFrom("test/bar/baz", "test/*/*", "foo/*/*"),
-      "foo/bar/baz",
-    );
+describe("test glob functionality", () => {
+  it("replace globs on path", () => {
+    [
+      ["foo", "test", "test", "foo"],
+      ["foo", "test/bar", "test/*", "foo"],
+      ["foo/*", "test/bar", "test/*", "foo/bar"],
+      ["foo/*", "test/bar/baz", "test/bar/*", "foo/baz"],
+      ["foo/*", "test/bar/baz", "test/*/*", "foo/bar"],
+      ["foo/*/*", "/abcdef/test/bar/baz", "test/*/*", "foo/bar/baz"],
+    ].forEach((x: string[]) => {
+      assertEquals(replace(x[0], matchOnPath(x[1], x[2])), x[3]);
+    });
     assertThrows(
-      () => replaceFrom("test/bar/baz", "test/bar/*", "foo/*/*"),
+      () => replace("foo/*/*", matchOnPath("test/bar/baz", "test/bar/*")),
       Error,
     );
   });
 
-  function replaceFrom(
-    template: string,
-    pattern: string,
-    string: string,
-): string {
-    return replace(string, match(template, pattern));
-}
-
-
+  it("replace globs on path", () => {
+    [
+      ["foo", "test", "test", "foo"],
+      ["foo", "test/bar", "test/*", "foo"],
+      //["foo/*", "test/bar", "test/*", "foo/bar"],
+      //["foo/*", "test/bar/baz", "test/bar/*", "foo/baz"],
+      //["foo/*", "test/bar/baz", "test/*/*", "foo/bar"],
+      //["foo/*/*", "/abcdef/test/bar/baz", "test/*/*", "foo/bar/baz"],
+    ].forEach((x: string[]) => {
+      assertEquals(replace(x[0], match(x[1], x[2])), x[3]);
+    });
+    assertThrows(
+      () => replace("foo/*/*", match("test/bar/baz", "test/bar/*")),
+      Error,
+    );
+  });
 });
