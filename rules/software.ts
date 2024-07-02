@@ -1,13 +1,13 @@
 import { parseImports } from "npm:parse-imports";
-import DependencyError from "../common/error.ts";
-import { walkDirectory, globDirectory } from "../common/file.ts";
+import { DependencyError } from "../common/error.ts";
+import * as walk from "../common/walk.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
-    if (xdependencies.length === 0)
-      return true;
-    await walkDirectory(directory, (path: string ) => fileDependsOn(path, ...xdependencies));
-    }, dependencies);
+  if (dependencies.length === 0)
+    return true;
+  await walk.onGlob(dir, async (directory: string) => {
+    await walk.onDir(directory, (path: string ) => fileDependsOn(path, ...dependencies));
+  });
   return true;
 }
 
@@ -30,9 +30,9 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
 }
 
 export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
-    await walkDirectory(directory, (path: string ) => fileDoesNotDependOn(path, ...xdependencies));
-    }, dependencies);
+  await walk.onGlob(dir, async (directory: string) => {
+    await walk.onDir(directory, (path: string ) => fileDoesNotDependOn(path, ...dependencies));
+  });
   return true;
 }
 

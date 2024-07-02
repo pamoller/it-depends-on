@@ -1,11 +1,12 @@
 import { parseImports} from "npm:parse-imports";
-import DependencyError from "../common/error.ts";
-import { dirname, globDirectory, walkDirectory } from "../common/file.ts";
+import { DependencyError } from "../common/error.ts";
+import { dirname } from "../common/file.ts";
+import * as walk from "../common/walk.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
+  await walk.onExpansion(dir, async (directory: string, xdependencies: string[] ) => {
     const extended = [directory, ...xdependencies];
-    await walkDirectory(directory, (path: string) => fileDependsOn(path, ...extended));
+    await walk.onDir(directory, (path: string) => fileDependsOn(path, ...extended));
   }, dependencies);
   return true;
 }
@@ -31,8 +32,8 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
 }
 
 export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
-    await walkDirectory(directory, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
+  await walk.onExpansion(dir, async (directory: string, xdependencies: string[] ) => {
+    await walk.onDir(directory, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
   }, dependencies);
   return true;
 }
