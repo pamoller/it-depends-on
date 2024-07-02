@@ -1,5 +1,6 @@
 import { walk } from "https://deno.land/std@0.170.0/fs/walk.ts";
 import { expandGlob } from "https://deno.land/std@0.224.0/fs/expand_glob.ts";
+import {replace, match} from "./glob.ts";
 import DependencyError from "./error.ts";
 
 export function dirname(path: string): string {
@@ -18,7 +19,7 @@ export async function globDirectory(
         }
         count++;
         const expandedDependencies = dependencies.map((dependency: string): string =>
-            expandDependency(globEntry.path, dir, dependency)
+            replace(dependency, match(globEntry.path, dir))
         );
         await callback(globEntry.path, expandedDependencies);
     }
@@ -26,34 +27,6 @@ export async function globDirectory(
         throw new DependencyError(`globbed directory "${dir}" does not exist`);
 }
 
-export function expandDependency(
-    globPath: string,
-    globPattern: string,
-    dependency: string,
-): string {
-    const globsInDependency = countGlobs(dependency);
-    const globsInGlobPattern = countGlobs(globPattern);
-    if (!globsInDependency|| !globsInGlobPattern)
-        return dependency;
-    if (globsInGlobPattern < globsInDependency)
-        throw new Error(`${dependency} contains to many globs *`);
-    const valuePattern = globPattern.replace(/\*/g, "([^\/]+)");
-    const globValues = new RegExp(valuePattern).exec(globPath) ?? [];
-    globValues.shift();
-    return replaceGlobs(dependency, globValues);
-}
-
-function replaceGlobs(path: string, globs: string[]): string {
-    let result = path;
-    while (globs.length > 0 && result.includes("*")) {
-        result = result.replace(/\*/, globs.shift() as string);
-    }
-    return result;
-}
-
-function countGlobs(str: string) {
-    return str.split("*").length - 1;
-}
 
 export async function walkDirectory(
     dir: string,

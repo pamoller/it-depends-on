@@ -3,9 +3,9 @@ import DependencyError from "../common/error.ts";
 import { dirname, globDirectory, walkDirectory } from "../common/file.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await globDirectory(dir, async (path: string, xdependencies: string[] ) => {
-    const extended = [path, ...xdependencies];
-    await walkDirectory(path, (path: string) => fileDependsOn(path, ...extended));
+  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
+    const extended = [directory, ...xdependencies];
+    await walkDirectory(directory, (path: string) => fileDependsOn(path, ...extended));
   }, dependencies);
   return true;
 }
@@ -31,7 +31,9 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
 }
 
 export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await walkDirectory(dir, (path: string ) => fileDoesNotDependOn(path, ...dependencies));
+  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
+    await walkDirectory(directory, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
+  }, dependencies);
   return true;
 }
 

@@ -9,8 +9,8 @@ describe("test the validity of software dependencies", () => {
   });
 
   it("allow software dependencies in infrasturcture layer only", async () => {
-    //assert(await directoryDoesNotDependOn("./test/ddd/*/application"));
-    //assert(await directoryDoesNotDependOn("./test/ddd/*/domain/model"));
+    assert(await directoryDoesNotDependOn("./test/ddd/*/application"));
+    assert(await directoryDoesNotDependOn("./test/ddd/*/domain/model"));
   });
 
   it("test/ddd/another is limited", async () => {

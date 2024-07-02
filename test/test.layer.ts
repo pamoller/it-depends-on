@@ -36,7 +36,7 @@ describe("test the layer policy within ddd domains", async () => {
     assert(
       await directoryDependsOn(
         "./test/ddd/*/infrastructure",
-        "./test/ddd/*.config.ts",
+        "./test/ddd/*/config.ts",
         "./test/ddd/*/domain/model",
         "./test/ddd/common/domain/model",
         "./test/ddd/common/infrastructure",

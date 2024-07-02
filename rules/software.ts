@@ -1,13 +1,16 @@
 import { parseImports } from "npm:parse-imports";
 import DependencyError from "../common/error.ts";
-import { walkDirectory } from "../common/file.ts";
+import { walkDirectory, globDirectory } from "../common/file.ts";
 
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  if (dependencies.length === 0)
-    return true;
-  await walkDirectory(dir, (path: string ) => fileDependsOn(path, ...dependencies));
+  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
+    if (xdependencies.length === 0)
+      return true;
+    await walkDirectory(directory, (path: string ) => fileDependsOn(path, ...xdependencies));
+    }, dependencies);
   return true;
 }
+
 
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
@@ -27,7 +30,9 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
 }
 
 export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
-  await walkDirectory(dir, (path: string ) => fileDoesNotDependOn(path, ...dependencies));
+  await globDirectory(dir, async (directory: string, xdependencies: string[] ) => {
+    await walkDirectory(directory, (path: string ) => fileDoesNotDependOn(path, ...xdependencies));
+    }, dependencies);
   return true;
 }
 
