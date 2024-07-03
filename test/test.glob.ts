@@ -6,20 +6,20 @@ import { replace, match, matchOnPath } from "../common/glob.ts";
 describe("test glob functionality", () => {
   it("replace globs on a path", () => {
     [
-      //["foo", "test", "test", "foo"],
-      //["foo", "test/bar", "test/*", "foo"],
-      ["foo/*", "foo/bar", "foo/*", "foo/bar"],
-      //["foo/*", "test/bar/baz", "test/bar/*", "foo/baz"],
-      //["foo/*", "test/bar/baz", "test/*/*", "foo/bar"],
-      //["foo/*/*", "test/bar/baz", "test/*/*", "foo/bar/baz"],
+      ["foo", "test", "foo", "foo"],
+      ["foo", "test/bar", "test/*", "foo"],
+      ["foo/*", "test/bar", "test/*", "foo/bar"],
+      ["foo/*", "test/bar/baz", "test/bar/*", "foo/baz"],
+      ["foo/*", "test/bar/baz", "test/*/*", "foo/bar"],
+      ["foo/*/*", "test/bar/baz", "test/*/*", "foo/bar/baz"],
     ].forEach((x: string[]) => {
       console.log(x[0], x[1], x[2], x[3])
       assertEquals(replace(x[0], matchOnPath(x[1], x[2])), x[3]);
     });
-    //assertThrows(
-    //  () => replace("foo/*/*", matchOnPath("test/bar/baz", "test/bar/*")),
-    //  Error,
-    //);
+    assertThrows(
+      () => replace("foo/*/*", matchOnPath("test/bar/baz", "test/bar/*")),
+      Error,
+    );
   });
 
   it("replace globs on a string", () => {
