@@ -32,7 +32,7 @@ describe("test the layer policy within ddd domains", async () => {
         "./test/ddd/*/infrastructure",
         "./test/ddd/common",
       ),
-      "accesses forbidden"
+      "accesses forbidden layer",
     );
   });
 
@@ -48,17 +48,21 @@ describe("test the layer policy within ddd domains", async () => {
     );
   });
 
-  assert(
-    await layer.directoryDoesNotDependOn(
-      "./test/ddd/business",
-      "./test/ddd/collaboration",
-    ),
-    "business depends derived domain collaboration",
-  );
+  it("negative assumption", async () => {
+    assert(
+      await layer.directoryDoesNotDependOn(
+        "./test/ddd/business",
+        "./test/ddd/collaboration",
+      ),
+      "business depends derived domain collaboration",
+    );
+  });
 
-  await assertThrowsAsync(async () => {
-    await layer.directoryDependsOn(
-      "./test/ddd/*",
-    ), "every domain may depend on common";
+  it("raise error", async () => {
+    await assertThrowsAsync(async () => {
+      await layer.directoryDependsOn(
+        "./test/ddd/*",
+      ), "every domain may depend on common";
+    });
   });
 });

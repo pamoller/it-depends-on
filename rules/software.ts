@@ -1,4 +1,4 @@
-import { parseImports } from "npm:parse-imports";
+import { parseImports } from "npm:parse-imports@^2.1.0";
 import { DependencyError } from "../common/error.ts";
 import * as walk from "../common/walk.ts";
 import { globs } from "../common/glob.ts";

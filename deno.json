@@ -1,0 +1,13 @@
+{
+  "name": "@pamoller/it-denpends-on",
+  "version": "0.1.0",
+  "exports": {
+    "./layer": "./rules/layer.ts",
+    "./software": "./rules/software.ts"
+  },
+  "imports": {
+    "@std/fs": "jsr:@std/fs@^0.229.3",
+    "@std/regexp": "jsr:@std/regexp@^0.224.1",
+    "parse-imports": "npm:parse-imports@^2.1.0"
+  }
+}

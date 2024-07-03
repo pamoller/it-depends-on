@@ -3,7 +3,7 @@
  * 
  * This module provides functions for matching and replacing globs in strings.
  */
-import { escape } from "https://deno.land/std@0.224.0/regexp/escape.ts";
+import { escape } from "jsr:@std/regexp@^0.224.1";
 import * as string from "./string.ts";
 
 // did the pattern match the string?

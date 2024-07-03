@@ -72,7 +72,7 @@ import * as software from @jsr:@pamoller/it-depends-on;
 
 describe("test layer policy", async () => {
     it("common is self containing", async () => {
-        assert(layer.directoryDependsOn("./common"));
+        assert(layer.directoryDoesNotDependOn("./common"));
     });
 
     it("rules and test are client of common", async () => {

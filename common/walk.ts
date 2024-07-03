@@ -1,5 +1,4 @@
-import { walk} from "https://deno.land/std@0.170.0/fs/walk.ts";
-import { expandGlob } from "https://deno.land/std@0.224.0/fs/expand_glob.ts";
+import { walk, expandGlob } from "jsr:@std/fs@^0.229.3";
 import { replace, matchOnPath} from "./glob.ts";
 import { DependencyError }from "./error.ts";
 

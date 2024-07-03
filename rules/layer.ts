@@ -1,4 +1,4 @@
-import { parseImports} from "npm:parse-imports";
+import { parseImports} from "npm:parse-imports@^2.1.0";
 import { DependencyError } from "../common/error.ts";
 import { dirname } from "../common/file.ts";
 import * as walk from "../common/walk.ts";
@@ -52,8 +52,8 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
       throw new DependencyError(`any imported resource is forbidden`);
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = await realPathFrom(dir, specifier);
-        const depPath = await realPathFrom(dep);
+      const specifierPath = realPathFrom(dir, specifier);
+        const depPath = realPathFrom(dep);
         if (specifierPath.startsWith(depPath))
           throw new DependencyError(`imported resource "${specifier}" in file "${path}" is forbidden`);
       }
@@ -61,9 +61,9 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
   return true; 
 }
 
-async function realPathFrom(...paths: string[]): Promise<string> {
+function realPathFrom(...paths: string[]): string {
   try {
-    return await Deno.realPath(paths.join("/"));
+    return Deno.realPathSync(paths.join("/"));
   } catch(e) {
     throw new DependencyError(`imported resource "${paths.join("/")}" does not exist`);
   }

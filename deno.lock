@@ -2,9 +2,28 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@std/fs": "jsr:@std/fs@0.229.3",
+      "jsr:@std/fs@^0.229.3": "jsr:@std/fs@0.229.3",
+      "jsr:@std/path@1.0.0-rc.1": "jsr:@std/path@1.0.0-rc.1",
+      "jsr:@std/regexp@^0.224.1": "jsr:@std/regexp@0.224.1",
       "npm:m": "npm:m@1.9.0",
       "npm:mongodb": "npm:mongodb@6.3.0",
-      "npm:parse-imports": "npm:parse-imports@2.1.0"
+      "npm:parse-imports": "npm:parse-imports@2.1.0",
+      "npm:parse-imports@^2.1.0": "npm:parse-imports@2.1.0"
+    },
+    "jsr": {
+      "@std/fs@0.229.3": {
+        "integrity": "783bca21f24da92e04c3893c9e79653227ab016c48e96b3078377ebd5222e6eb",
+        "dependencies": [
+          "jsr:@std/path@1.0.0-rc.1"
+        ]
+      },
+      "@std/path@1.0.0-rc.1": {
+        "integrity": "b8c00ae2f19106a6bb7cbf1ab9be52aa70de1605daeb2dbdc4f87a7cbaf10ff6"
+      },
+      "@std/regexp@0.224.1": {
+        "integrity": "9d49636ebcfe111db1f3f2c85180497baf2d3f83b6abfe89a493c8a356cf24bc"
+      }
     },
     "npm": {
       "@mongodb-js/saslprep@1.1.4": {
@@ -271,5 +290,17 @@
     "https://deno.land/std@0.55.0/fmt/colors.ts": "06444b6ebc3842a4b2340d804bfa81fc5452a03513cbb81bd7f6bf8f4b8f3ac4",
     "https://deno.land/std@0.55.0/testing/asserts.ts": "4133876642e3a8b79c0b350104e8c88d2cc7c5f1ab3ae1a7b0bee21674634c5b",
     "https://deno.land/std@0.55.0/testing/diff.ts": "77338e2b479626c096278d7b4a95f750753ee39558f314db6b794e8d8a98d515"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/fs@^0.229.3",
+      "jsr:@std/regexp@^0.224.1",
+      "npm:parse-imports@^2.1.0"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:parse-imports@^2.1.0"
+      ]
+    }
   }
 }
