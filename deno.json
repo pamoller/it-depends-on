@@ -1,6 +1,6 @@
 {
   "name": "@pamoller/it-denpends-on",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "helps unit testing your architecture",
   "exports": {
     "./layer": "./rules/layer.ts",
