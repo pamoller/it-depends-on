@@ -3,6 +3,7 @@ import { DependencyError } from "../common/error.ts";
 import * as walk from "../common/walk.ts";
 import { globs } from "../common/glob.ts";
 
+// recurse directory glob and scan file imports for missing dependencies
 export async function directoryDependsOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   if (dependencies.length === 0)
     return true;
@@ -12,7 +13,10 @@ export async function directoryDependsOn(dir: string, ...dependencies: string[])
   return true;
 }
 
+// scan file imports for missing dependencies
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
+  if (dependencies.length === 0)
+    return true;
   const code = Deno.readTextFileSync(path);
   specifier:
   for (const $import of await parseImports(code)) {
@@ -29,6 +33,7 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
   return true; 
 }
 
+// recurse directory glob and scan file imports for forbidden dependencies
 export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   await walk.onGlob(dir, async (dir: string) => {
     await walk.onDir(dir, (path: string ) => fileDoesNotDependOn(path, ...dependencies));
@@ -36,6 +41,7 @@ export async function directoryDoesNotDependOn(dir: string, ...dependencies: str
   return true;
 }
 
+// scan file imports for forbidden dependencies
 export async function fileDoesNotDependOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
   specifier:

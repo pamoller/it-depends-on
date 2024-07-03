@@ -1,8 +1,0 @@
-{
-    "./commmon": { 
-        "dependsOn": []
-    },
-    "./rules": {
-        "dependsOn": ["./commmon"]
-    }
-}

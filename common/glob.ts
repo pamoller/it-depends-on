@@ -24,14 +24,10 @@ export function matchOnPath(path: string, pattern: string): string[] {
 
 // replace globs in string
 export function replace(string: string, globs: string[]): string {
-    console.log("replace", string, globs);
     const cnt = count(string);
     let result = string;
     if (!cnt || globs.length === 0) {
         return result;
-    }
-    if (globs.length < cnt) {
-        throw new Error(`${string} contains too many globs *`);
     }
     while (globs.length > 0 && result.includes("*")) {
         result = result.replace(/\*/, globs.shift() as string);
