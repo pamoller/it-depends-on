@@ -294,8 +294,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/fs@^0.229.3",
-      "jsr:@std/regexp@^0.224.1",
-      "npm:parse-imports@^2.1.0"
+      "jsr:@std/regexp@^0.224.1"
     ],
     "packageJson": {
       "dependencies": [
