@@ -1,5 +1,5 @@
 {
-  "name": "@pamoller/it-denpends-on",
+  "name": "@pamoller/it-depends-on",
   "version": "0.1.3",
   "description": "helps unit testing your architecture",
   "exports": {
