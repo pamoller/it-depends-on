@@ -30,7 +30,7 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
   return true; 
 }
 
-export async function dirDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
+export async function directoryDoesNotDependOn(dir: string, ...dependencies: string[]): Promise<boolean> {
   await walk.onExpansion(dir, async (dir: string, xdependencies: string[] ) => {
     await walk.onDir(dir, (path: string) => fileDoesNotDependOn(path, ...xdependencies));
   }, dependencies);

@@ -1,37 +1,45 @@
+/**
+ * glob.ts
+ * 
+ * This module provides functions for matching and replacing globs in strings.
+ */
 import { escape } from "https://deno.land/std@0.224.0/regexp/escape.ts";
+import * as string from "./string.ts";
 
-export function matchOnPath(string: string, pattern: string): string[] {
-    const normalized = pattern.replace(".", "");
-    const regexp = (escape(normalized)).replace(/(\\\*)/g, "([^\/]*)") + "$";
-    const result = new RegExp(regexp).exec(string) ?? [];
-    result.shift();
-    return result;
+// did the pattern match the string?
+export function globs(string: string, pattern: string): boolean {
+    return "input" in match(string, pattern);
 }
 
-export function match(string: string, pattern: string): string[] {
-    const regexp = (escape(pattern.replace("./", ""))).replace(/(\\\*)/g, "(.*?)");
-    const result = new RegExp(regexp).exec(string) ?? [];
-    result.shift();
-    return result;
+// match pattern in string
+export function match(text: string, pattern: string): string[] {
+    return string.match(text, escape(pattern).replace(/(\\\*)/g, "(.*?)") + "$");
 }
 
+// match pattern at the end of an expanded, absolute path
+export function matchOnPath(path: string, pattern: string): string[] {
+    pattern = pattern.replace(/^\.+/, "");
+    return string.match(path, escape(pattern).replace(/(\\\*)/g, "([^\/]*)") + "$");
+}
+
+// replace globs in string
 export function replace(string: string, globs: string[]): string {
-    const cnt = countGlobs(string);
+    console.log("replace", string, globs);
+    const cnt = count(string);
     let result = string;
-    if (!cnt || globs.length === 0)
+    if (!cnt || globs.length === 0) {
         return result;
-    if (globs.length < cnt)
+    }
+    if (globs.length < cnt) {
         throw new Error(`${string} contains too many globs *`);
+    }
     while (globs.length > 0 && result.includes("*")) {
         result = result.replace(/\*/, globs.shift() as string);
     }
     return result;
 }
 
-function countGlobs(str: string) {
+function count(str: string) {
     return str.split("*").length - 1;
 }
 
-export function globs(string: string, pattern: string): boolean {
-    return "input" in match(string, pattern);
-}
