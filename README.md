@@ -1,3 +1,5 @@
+[![JSR @pamoller/it-depends-on](https://jsr.io/badges/@pamoller/it-depends-on)](https://jsr.io/@pamoller/it-depends-on)
+
 # it depends on ...
 
 is a typescript library wich helps *unit testing* your architecture.
