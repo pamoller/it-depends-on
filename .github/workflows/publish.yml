@@ -1,19 +1,25 @@
 name: Publish
 on:
   push:
-    branches:
-      - main
+    branches: [ "master" ]
+    tags:
+      - v*
 
 jobs:
   publish:
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    
     runs-on: ubuntu-latest
-
+    
     permissions:
       contents: read
       id-token: write
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Test
+        run: deno test --allow-all test/test*.ts
 
       - name: Install
         run: npm install
