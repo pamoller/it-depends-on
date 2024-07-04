@@ -9,6 +9,15 @@ export function dirname(path: string): string {
     }
 }
 
+export function translate(path: string): string {
+    switch (os.platform()) {
+        case "windows":
+            return path.replace(/\//g, "\\");
+        default:
+            return path;
+    }
+}
+
 export function join(path: string[]) {
     switch (os.platform()) {
         case "windows":
@@ -17,3 +26,11 @@ export function join(path: string[]) {
             return path.join("/");
     }
 }
+
+export function xpath(...path: string[]): string {
+    try {
+      return Deno.realPathSync(join(path));
+    } catch(e) {
+      throw new Error(`imported resource "${translate(path.join("/"))}" does not exist`);
+    }
+  }

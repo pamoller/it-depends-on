@@ -1,7 +1,6 @@
 import { parseImports} from "npm:parse-imports@^2.1.0";
 import { DependencyError } from "../common/error.ts";
-import { dirname } from "../common/file.ts";
-import { translate } from "../common/dependency.ts";
+import { dirname, translate, xpath } from "../common/file.ts";
 import * as walk from "../common/walk.ts";
 /**
 * This module contains functions to check layer dependencies in a software system.
@@ -27,8 +26,8 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
       continue specifier 
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = await realPathFrom(dir, translate(specifier));
-      const depPath = await realPathFrom(dep);
+      const specifierPath = await xpath(dir, translate(specifier));
+      const depPath = await xpath(translate(dep));
       if (specifierPath.startsWith(depPath))
         continue specifier
     }
@@ -57,8 +56,8 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
       throw new DependencyError(`any imported resource is forbidden`);
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = realPathFrom(dir, translate(specifier));
-        const depPath = realPathFrom(dep);
+      const specifierPath = xpath(dir, translate(specifier));
+        const depPath = xpath(translate(dep));
         if (specifierPath.startsWith(depPath))
           throw new DependencyError(`imported resource "${translate(specifier)}" in file "${path}" is forbidden`);
       }
@@ -66,10 +65,3 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
   return true; 
 }
 
-function realPathFrom(...paths: string[]): string {
-  try {
-    return Deno.realPathSync(paths.join("/"));
-  } catch(e) {
-    throw new DependencyError(`imported resource "${paths.join("/")}" does not exist`);
-  }
-}
