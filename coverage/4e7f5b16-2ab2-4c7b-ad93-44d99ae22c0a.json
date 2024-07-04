@@ -1,0 +1,16 @@
+{
+  "scriptId": "401",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/node_modules/.deno/slashes@3.0.12/node_modules/slashes/lib/esm/add-slashes.js",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 647, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "addSlashes",
+      "ranges": [{ "startOffset": 142, "endOffset": 583, "count": 0 }],
+      "isBlockCoverage": false
+    }
+  ]
+}

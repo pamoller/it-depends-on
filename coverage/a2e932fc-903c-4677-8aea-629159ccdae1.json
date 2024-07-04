@@ -1,0 +1,39 @@
+{
+  "scriptId": "310",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/test/test.software.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 1118, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 337, "endOffset": 1115, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 408, "endOffset": 586, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 611, "endOffset": 1060, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        { "startOffset": 825, "endOffset": 927, "count": 1 },
+        { "startOffset": 921, "endOffset": 926, "count": 0 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 1099, "endOffset": 1111, "count": 1 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

@@ -9,5 +9,8 @@
   "imports": {
     "@std/fs": "jsr:@std/fs@^0.229.3",
     "@std/regexp": "jsr:@std/regexp@^0.224.1"
+  },
+  "tasks": {
+    "test": "deno test --doc --allow-all --parallel --coverage --trace-leaks --clean test/test.*.ts"
   }
 }

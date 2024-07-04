@@ -18,7 +18,7 @@
  *         assert(layer.directoryDependsOn("./rules", "./common"));
  *         assert(layer.directoryDependsOn("./test", "./common"));
  *     });
- * });* ```
+ * }); ```
  *
  * @module
  */

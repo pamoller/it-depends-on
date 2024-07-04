@@ -1,0 +1,86 @@
+{
+  "scriptId": "314",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/rules/layer.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 2767, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "directoryDependsOn",
+      "ranges": [
+        { "startOffset": 384, "endOffset": 671, "count": 5 },
+        { "startOffset": 654, "endOffset": 670, "count": 4 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        { "startOffset": 472, "endOffset": 638, "count": 14 },
+        { "startOffset": 634, "endOffset": 637, "count": 13 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 592, "endOffset": 632, "count": 26 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fileDependsOn",
+      "ranges": [
+        { "startOffset": 730, "endOffset": 1448, "count": 26 },
+        { "startOffset": 919, "endOffset": 1431, "count": 42 },
+        { "startOffset": 974, "endOffset": 993, "count": 11 },
+        { "startOffset": 993, "endOffset": 1046, "count": 31 },
+        { "startOffset": 1046, "endOffset": 1051, "count": 0 },
+        { "startOffset": 1088, "endOffset": 1271, "count": 49 },
+        { "startOffset": 1246, "endOffset": 1265, "count": 30 },
+        { "startOffset": 1271, "endOffset": 1431, "count": 1 },
+        { "startOffset": 1431, "endOffset": 1447, "count": 25 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "directoryDoesNotDependOn",
+      "ranges": [{ "startOffset": 1536, "endOffset": 1776, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 1630, "endOffset": 1743, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 1686, "endOffset": 1737, "count": 5 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fileDoesNotDependOn",
+      "ranges": [
+        { "startOffset": 1837, "endOffset": 2567, "count": 5 },
+        { "startOffset": 2032, "endOffset": 2550, "count": 8 },
+        { "startOffset": 2087, "endOffset": 2106, "count": 2 },
+        { "startOffset": 2106, "endOffset": 2142, "count": 6 },
+        { "startOffset": 2142, "endOffset": 2206, "count": 0 },
+        { "startOffset": 2206, "endOffset": 2259, "count": 6 },
+        { "startOffset": 2259, "endOffset": 2264, "count": 0 },
+        { "startOffset": 2301, "endOffset": 2546, "count": 6 },
+        { "startOffset": 2447, "endOffset": 2540, "count": 0 },
+        { "startOffset": 2546, "endOffset": 2550, "count": 6 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "realPathFrom",
+      "ranges": [
+        { "startOffset": 2568, "endOffset": 2766, "count": 110 },
+        { "startOffset": 2661, "endOffset": 2764, "count": 0 }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}
