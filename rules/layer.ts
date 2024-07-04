@@ -20,6 +20,7 @@ export async function directoryDependsOn(dir: string, ...dependencies: string[])
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
   const dir = dirname(path);
+  console.log(dir, path);
   specifier:
   for (const $import of await parseImports(code)) {
     if ($import.moduleSpecifier.type !== "relative") 
