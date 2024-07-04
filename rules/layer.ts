@@ -1,6 +1,6 @@
 import { parseImports} from "npm:parse-imports@^2.1.0";
 import { DependencyError } from "../common/error.ts";
-import { dirname } from "../common/file.ts";
+import { dirname, translate } from "../common/file.ts";
 import * as walk from "../common/walk.ts";
 /**
 * This module contains functions to check layer dependencies in a software system.
@@ -19,8 +19,8 @@ export async function directoryDependsOn(dir: string, ...dependencies: string[])
 /** scan file imports for missing dependencies **/
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
-  const dir = dirname(path);
-  console.log(dir, path);
+  const dir = dirname(translate(path));
+  console.log(999, path, translate(path), dir);
   specifier:
   for (const $import of await parseImports(code)) {
     if ($import.moduleSpecifier.type !== "relative") 
