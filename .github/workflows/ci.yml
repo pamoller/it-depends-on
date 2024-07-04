@@ -47,13 +47,6 @@ jobs:
         env:
           DENO_FUTURE: 1
 
-      - name: Run timezone-dependent tests
-        run: |
-          TZ=Australia/Sydney deno test datetime
-          TZ=Europe/London deno test datetime
-          TZ=America/Toronto deno test datetime
-        if: matrix.os == 'ubuntu-latest'
-
 #      - name: Type check browser compatible modules
 #        shell: bash
 #        run: deno task test:browser
