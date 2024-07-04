@@ -58,7 +58,7 @@ describe("test the layer policy within ddd domains", async () => {
     );
   });
 
-  it("raise error", async () => {
+  it("raise an error", async () => {
     await assertThrowsAsync(async () => {
       await layer.directoryDependsOn(
         "./test/ddd/*",
