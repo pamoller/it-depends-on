@@ -1,6 +1,7 @@
 import { parseImports} from "npm:parse-imports@^2.1.0";
 import { DependencyError } from "../common/error.ts";
-import { dirname, translate } from "../common/file.ts";
+import { dirname } from "../common/file.ts";
+import { translate } from "../common/dependency.ts";
 import * as walk from "../common/walk.ts";
 /**
 * This module contains functions to check layer dependencies in a software system.
@@ -20,19 +21,18 @@ export async function directoryDependsOn(dir: string, ...dependencies: string[])
 export async function fileDependsOn(path: string, ...dependencies: string[]): Promise<boolean> {
   const code = Deno.readTextFileSync(path);
   const dir = dirname(translate(path));
-  console.log(999, path, translate(path), dir);
   specifier:
   for (const $import of await parseImports(code)) {
     if ($import.moduleSpecifier.type !== "relative") 
       continue specifier 
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = await realPathFrom(dir, specifier);
+      const specifierPath = await realPathFrom(dir, translate(specifier));
       const depPath = await realPathFrom(dep);
       if (specifierPath.startsWith(depPath))
         continue specifier
     }
-    throw new DependencyError(`imported resource "${specifier}" in file "${path}" is a not registered specifier, allowed are: ${dependencies.join(", ")}`);
+    throw new DependencyError(`imported resource "${translate(specifier)}" in file "${path}" is a not registered specifier, allowed are: ${dependencies.join(", ")}`);
   }
   return true; 
 }
@@ -57,10 +57,10 @@ export async function fileDoesNotDependOn(path: string, ...dependencies: string[
       throw new DependencyError(`any imported resource is forbidden`);
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = realPathFrom(dir, specifier);
+      const specifierPath = realPathFrom(dir, translate(specifier));
         const depPath = realPathFrom(dep);
         if (specifierPath.startsWith(depPath))
-          throw new DependencyError(`imported resource "${specifier}" in file "${path}" is forbidden`);
+          throw new DependencyError(`imported resource "${translate(specifier)}" in file "${path}" is forbidden`);
       }
   }
   return true; 
