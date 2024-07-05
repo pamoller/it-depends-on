@@ -3,48 +3,31 @@ import { assertEquals } from "https://deno.land/std@0.196.0/assert/mod.ts";
 import { replace, match, matchOnPath } from "../common/glob.ts";
 import { translate } from "../common/file.ts";
 describe("path are translated", () => {
-  it("translates posix paths", () => {
-    [
-      ['foo', '/test', 'foo', 'foo'],
-      ['foo', '/test/bar', 'test/*', 'foo'],
-      ['foo/*', '/test/bar', 'test', 'foo/*'],
-      ['foo/*', '/test/bar', 'test/*', 'foo/bar'],
-      ['foo/*', '/test/bar', './test/*', 'foo/bar'],
-      ['foo/*', '/test/bar', '/test/*', 'foo/bar'],
-      ['foo/*/*', '/test/bar', '/test/*', 'foo/bar/*'],
-      ['foo/*', '/test/bar/baz', 'test/bar/*', 'foo/baz'],
-      ['foo/*', '/test/bar/baz', 'test/*/baz', 'foo/bar'],
-      ['foo/*', '/test/bar/baz', 'test/*/*', 'foo/bar'],
-      ['foo/*/*', '/test/bar/baz', 'test/*/*', 'foo/bar/baz'],
-      ['foo/*/*', '/root/abc/test/bar/baz', 'test/*/*', 'foo/bar/baz'],
-      ['foo/*/*/*', '/root/abc/test/bar/baz', 'test/*/*', 'foo/bar/baz/*'],
-    ].forEach((x: string[]) => {
-      assertEquals(replace(translate(x[0]), matchOnPath(x[1], translate(x[2]))), x[3]);
-    });
-  });
-
-  it("translates windows paths", () => {
+  ["posix", "windows"].forEach((platform) => {
     Deno.env.set("PLATFORM", "windows");
+
+  it(`translates generic paths for platorm ${platform}`, () => {
     [
-      ["foo", "\\test", "foo", "foo"],
-      ["foo", "\\test\\bar", "test/*", "foo"],
-      ["foo/*", "\\test\\bar", "test", "foo\\*"],
-      ["foo/*", "\\test\\bar", "test/*", "foo\\bar"],
-      ["foo/*", "\\test\\bar", "./test/*", "foo\\bar"],
-      ["foo/*", "\\test\\bar", "/test/*", "foo\\bar"],
-      ["foo/*/*", "\\test\\bar", "/test/*", "foo\\bar\\*"],
-      ["foo/*", "\\test\\bar\\baz", "test/bar/*", "foo\\baz"],
-      ["foo/*", "\\test\\bar\\baz", "test/*/baz", "foo\\bar"],
-      ["foo/*", "\\test\\bar\\baz", "test/*/*", "foo\\bar"],
-      ["foo/*/*", "\\test\\bar\\baz", "test/*/*", "foo\\bar\\baz"],
-      ["foo/*/*", "C:\\abc\\test\\bar\\baz", "test/*/*", "foo\\bar\\baz"],
-      ["foo/*/*/*", "D:\\abc\\test\\bar\\baz", "test/*/*", "foo\\bar\\baz\\*"],
+      ['foo', translate('/test'), 'foo', translate('foo')],
+      ['foo', translate('/test/bar'), 'test/*', translate('foo')],
+      ['foo/*', translate('/test/bar'), 'test', translate('foo/*')],
+      ['foo/*', translate('/test/bar'), 'test/*', translate('foo/bar')],
+      ['foo/*', translate('/test/bar'), './test/*', translate('foo/bar')],
+      ['foo/*', translate('/test/bar'), '/test/*', translate('foo/bar')],
+      ['foo/*/*', translate('/test/bar'), '/test/*', translate('foo/bar/*')],
+      ['foo/*', translate('/test/bar/baz'), 'test/bar/*', translate('foo/baz')],
+      ['foo/*', translate('/test/bar/baz'), 'test/*/baz', translate('foo/bar')],
+      ['foo/*', translate('/test/bar/baz'), 'test/*/*', translate('foo/bar')],
+      ['foo/*/*', translate('/test/bar/baz'), 'test/*/*', translate('foo/bar/baz')],
+      ['foo/*/*', translate('/root/abc/test/bar/baz'), 'test/*/*', translate('foo/bar/baz')],
+      ['foo/*/*/*', translate('/root/abc/test/bar/baz'), 'test/*/*', translate('foo/bar/baz/*')],
     ].forEach((x: string[]) => {
       assertEquals(replace(translate(x[0]), matchOnPath(x[1], translate(x[2]))), x[3]);
     });
     Deno.env.delete("PLATFORM");
   });
-
+  });
+  
   it("function match translates well", () => {
     [
       ["foo", "test", "test", "foo"],
