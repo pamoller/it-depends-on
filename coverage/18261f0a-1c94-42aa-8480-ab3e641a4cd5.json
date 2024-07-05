@@ -4,32 +4,32 @@
   "functions": [
     {
       "functionName": "",
-      "ranges": [{ "startOffset": 0, "endOffset": 1056, "count": 1 }],
+      "ranges": [{ "startOffset": 0, "endOffset": 1145, "count": 1 }],
       "isBlockCoverage": true
     },
     {
       "functionName": "globs",
-      "ranges": [{ "startOffset": 236, "endOffset": 315, "count": 10 }],
+      "ranges": [{ "startOffset": 271, "endOffset": 350, "count": 10 }],
       "isBlockCoverage": true
     },
     {
       "functionName": "match",
-      "ranges": [{ "startOffset": 350, "endOffset": 463, "count": 10 }],
+      "ranges": [{ "startOffset": 385, "endOffset": 498, "count": 10 }],
       "isBlockCoverage": true
     },
     {
       "functionName": "matchOnPath",
-      "ranges": [{ "startOffset": 529, "endOffset": 692, "count": 0 }],
+      "ranges": [{ "startOffset": 564, "endOffset": 751, "count": 0 }],
       "isBlockCoverage": false
     },
     {
       "functionName": "replace",
-      "ranges": [{ "startOffset": 727, "endOffset": 995, "count": 0 }],
+      "ranges": [{ "startOffset": 786, "endOffset": 1084, "count": 0 }],
       "isBlockCoverage": false
     },
     {
       "functionName": "count",
-      "ranges": [{ "startOffset": 996, "endOffset": 1055, "count": 0 }],
+      "ranges": [{ "startOffset": 1085, "endOffset": 1144, "count": 0 }],
       "isBlockCoverage": false
     }
   ]

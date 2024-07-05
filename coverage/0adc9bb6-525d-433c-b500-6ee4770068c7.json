@@ -1,5 +1,5 @@
 {
-  "scriptId": "363",
+  "scriptId": "345",
   "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/string.ts",
   "functions": [
     {
@@ -10,8 +10,8 @@
     {
       "functionName": "match",
       "ranges": [
-        { "startOffset": 7, "endOffset": 132, "count": 29 },
-        { "startOffset": 89, "endOffset": 94, "count": 0 }
+        { "startOffset": 7, "endOffset": 132, "count": 24 },
+        { "startOffset": 89, "endOffset": 94, "count": 4 }
       ],
       "isBlockCoverage": true
     }
