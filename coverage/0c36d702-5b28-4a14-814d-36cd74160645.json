@@ -1,0 +1,78 @@
+{
+  "scriptId": "314",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/rules/software.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 2288, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "directoryDependsOn",
+      "ranges": [
+        { "startOffset": 386, "endOffset": 625, "count": 2 },
+        { "startOffset": 477, "endOffset": 489, "count": 0 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 515, "endOffset": 606, "count": 4 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 556, "endOffset": 600, "count": 3 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fileDependsOn",
+      "ranges": [
+        { "startOffset": 684, "endOffset": 1319, "count": 3 },
+        { "startOffset": 771, "endOffset": 783, "count": 0 },
+        { "startOffset": 890, "endOffset": 1302, "count": 12 },
+        { "startOffset": 944, "endOffset": 949, "count": 0 },
+        { "startOffset": 1027, "endOffset": 1046, "count": 7 },
+        { "startOffset": 1046, "endOffset": 1082, "count": 5 },
+        { "startOffset": 1082, "endOffset": 1142, "count": 10 },
+        { "startOffset": 1117, "endOffset": 1136, "count": 5 },
+        { "startOffset": 1142, "endOffset": 1302, "count": 0 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "directoryDoesNotDependOn",
+      "ranges": [
+        { "startOffset": 1408, "endOffset": 1613, "count": 3 },
+        { "startOffset": 1596, "endOffset": 1612, "count": 2 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [
+        { "startOffset": 1497, "endOffset": 1594, "count": 7 },
+        { "startOffset": 1590, "endOffset": 1593, "count": 6 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 1538, "endOffset": 1588, "count": 8 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fileDoesNotDependOn",
+      "ranges": [
+        { "startOffset": 1674, "endOffset": 2287, "count": 8 },
+        { "startOffset": 1840, "endOffset": 2270, "count": 10 },
+        { "startOffset": 1894, "endOffset": 1899, "count": 0 },
+        { "startOffset": 1977, "endOffset": 1996, "count": 9 },
+        { "startOffset": 1996, "endOffset": 2096, "count": 1 },
+        { "startOffset": 2096, "endOffset": 2270, "count": 0 },
+        { "startOffset": 2270, "endOffset": 2286, "count": 7 }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}

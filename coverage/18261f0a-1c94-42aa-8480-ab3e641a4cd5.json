@@ -1,0 +1,36 @@
+{
+  "scriptId": "343",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/glob.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 1145, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "globs",
+      "ranges": [{ "startOffset": 271, "endOffset": 350, "count": 10 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "match",
+      "ranges": [{ "startOffset": 385, "endOffset": 498, "count": 10 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "matchOnPath",
+      "ranges": [{ "startOffset": 564, "endOffset": 751, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "replace",
+      "ranges": [{ "startOffset": 786, "endOffset": 1084, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "count",
+      "ranges": [{ "startOffset": 1085, "endOffset": 1144, "count": 0 }],
+      "isBlockCoverage": false
+    }
+  ]
+}

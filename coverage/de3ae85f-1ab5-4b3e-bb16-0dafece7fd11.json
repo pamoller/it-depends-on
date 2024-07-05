@@ -1,0 +1,16 @@
+{
+  "scriptId": "415",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/node_modules/.deno/slashes@3.0.12/node_modules/slashes/lib/esm/get-unescaped-any.js",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 513, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "getUnescapedAny",
+      "ranges": [{ "startOffset": 24, "endOffset": 438, "count": 0 }],
+      "isBlockCoverage": false
+    }
+  ]
+}

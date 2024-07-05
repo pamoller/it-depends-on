@@ -1,0 +1,16 @@
+{
+  "scriptId": "341",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/error.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 130, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "DependencyError",
+      "ranges": [{ "startOffset": 47, "endOffset": 127, "count": 1 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

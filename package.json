@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "parse-imports": "npm:parse-imports@^2.1.0"
+  }
+}

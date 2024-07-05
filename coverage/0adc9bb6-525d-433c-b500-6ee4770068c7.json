@@ -1,0 +1,19 @@
+{
+  "scriptId": "345",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/string.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 133, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "match",
+      "ranges": [
+        { "startOffset": 7, "endOffset": 132, "count": 24 },
+        { "startOffset": 89, "endOffset": 94, "count": 4 }
+      ],
+      "isBlockCoverage": true
+    }
+  ]
+}

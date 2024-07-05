@@ -1,0 +1,40 @@
+{
+  "scriptId": "342",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/walk.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 1088, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "onDir",
+      "ranges": [
+        { "startOffset": 160, "endOffset": 337, "count": 11 },
+        { "startOffset": 236, "endOffset": 335, "count": 25 },
+        { "startOffset": 259, "endOffset": 288, "count": 11 },
+        { "startOffset": 290, "endOffset": 331, "count": 11 },
+        { "startOffset": 325, "endOffset": 331, "count": 10 },
+        { "startOffset": 335, "endOffset": 336, "count": 10 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "onGlob",
+      "ranges": [
+        { "startOffset": 345, "endOffset": 647, "count": 5 },
+        { "startOffset": 451, "endOffset": 561, "count": 11 },
+        { "startOffset": 485, "endOffset": 508, "count": 0 },
+        { "startOffset": 557, "endOffset": 561, "count": 10 },
+        { "startOffset": 561, "endOffset": 579, "count": 4 },
+        { "startOffset": 579, "endOffset": 645, "count": 0 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "onExpansion",
+      "ranges": [{ "startOffset": 655, "endOffset": 1087, "count": 0 }],
+      "isBlockCoverage": false
+    }
+  ]
+}

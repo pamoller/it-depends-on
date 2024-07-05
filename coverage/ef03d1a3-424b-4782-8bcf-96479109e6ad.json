@@ -1,0 +1,43 @@
+{
+  "scriptId": "338",
+  "url": "file:///Users/pa/Projects/pamoller/it-depends-on/common/glob.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 1145, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "globs",
+      "ranges": [{ "startOffset": 271, "endOffset": 350, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "match",
+      "ranges": [{ "startOffset": 385, "endOffset": 498, "count": 9 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "matchOnPath",
+      "ranges": [{ "startOffset": 564, "endOffset": 751, "count": 15 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "replace",
+      "ranges": [
+        { "startOffset": 786, "endOffset": 1084, "count": 24 },
+        { "startOffset": 913, "endOffset": 934, "count": 18 },
+        { "startOffset": 936, "endOffset": 960, "count": 7 },
+        { "startOffset": 960, "endOffset": 986, "count": 17 },
+        { "startOffset": 1010, "endOffset": 1065, "count": 22 },
+        { "startOffset": 1065, "endOffset": 1083, "count": 17 }
+      ],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "count",
+      "ranges": [{ "startOffset": 1085, "endOffset": 1144, "count": 24 }],
+      "isBlockCoverage": true
+    }
+  ]
+}
