@@ -26,8 +26,8 @@ export async function fileDependsOn(path: string, ...dependencies: string[]): Pr
       continue specifier 
     const specifier = $import.moduleSpecifier.value ?? "";
     for (const dep of dependencies) {
-      const specifierPath = await xpath(dir, translate(specifier));
-      const depPath = await xpath(translate(dep));
+      const specifierPath = xpath(dir, translate(specifier));
+      const depPath = xpath(translate(dep));
       if (specifierPath.startsWith(depPath))
         continue specifier
     }
