@@ -1,7 +1,7 @@
 import { walk, expandGlob } from "jsr:@std/fs@^0.229.3";
 import { replace, matchOnPath} from "./glob.ts";
 import { DependencyError }from "./error.ts";
-
+import { translate } from "./file.ts";
 export async function onDir(
     dir: string,
     callback: (path: string) => void,
@@ -36,13 +36,13 @@ export async function onExpansion(
     dependencies: string[],
 ): Promise<void> {
     let count = 0;
-    for await (const globEntry of expandGlob(glob)) {
+    for await (const globEntry of expandGlob(translate(glob))) {
         if (!globEntry.isDirectory) {
             continue;
         }
         count++;
         const expanded = dependencies.map((string: string): string =>
-            replace(string, matchOnPath(globEntry.path, glob))
+            replace(translate(string), matchOnPath(globEntry.path, translate(glob)))
         );
         await callback(globEntry.path, expanded);
     }
