@@ -1,7 +1,5 @@
-import os from "dos";
-
 function platform(): string {
-    return Deno.env.get('PLATFORM') ?? os.platform();
+    return Deno.env.get('PLATFORM') ?? Deno.build.os;
 }
 
 export function dirname(path: string): string {
