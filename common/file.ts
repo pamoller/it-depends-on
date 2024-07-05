@@ -1,3 +1,5 @@
+import { parseImports } from "npm:parse-imports@^2.1.0";
+
 function platform(): string {
     return Deno.env.get('PLATFORM') ?? Deno.build.os;
 }
@@ -45,5 +47,18 @@ export function pathSeparator(): string {
             return "\\";
         default:
             return "/";
+    }
+}
+
+export async function* specifiers(path: string, relative=true) {
+    const code = Deno.readTextFileSync(path);
+    specifier:
+    for (const $import of await parseImports(code)) {
+        const type = $import.moduleSpecifier.type;
+        const specifier = $import.moduleSpecifier.value ?? "";
+        if (relative &&  type !== "relative" || !relative && type === "relative") {
+            continue specifier;
+        }
+        yield specifier;
     }
 }
