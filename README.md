@@ -1,5 +1,5 @@
 [![JSR @pamoller/it-depends-on](https://jsr.io/badges/@pamoller/it-depends-on)](https://jsr.io/@pamoller/it-depends-on)
-
+[![GitHub Actions CI](https://github.com/pamoller/it-depends-on/workflows/ci/badge.svg)](https://github.com/pamoller/it-depends-on/actions/workflows/ci.yml)
 # it depends on ...
 
 is a typescript library wich helps *unit testing* your architecture.
