@@ -1,4 +1,4 @@
-import os from "https://deno.land/x/dos@v0.11.0/mod.ts";
+import os from "dos";
 
 function platform(): string {
     return Deno.env.get('PLATFORM') ?? os.platform();
@@ -16,7 +16,6 @@ export function dirname(path: string): string {
 export function translate(path: string): string {
     switch (platform()) {
         case "windows":
-            console.log(888, path)
             return path.replace(/\//g, "\\");
         default:
             return path;

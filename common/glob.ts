@@ -20,19 +20,11 @@ export function match(text: string, pattern: string): string[] {
 // match pattern at the end of an expanded, absolute path
 export function matchOnPath(path: string, pattern: string): string[] {
     pattern = pattern.replace(/^\.+/, "");
-    console.log("path:", path);
-    console.log("pattern:", pattern);
-    console.log("escape:", escape(pattern));
-    console.log("pathSeparator:", `([^\\${file.pathSeparator()}]*)`);
-    console.log("matched:", escape(pattern).replace(/(\\\*)/g, `([^\\${file.pathSeparator()}]*)`));
     return string.match(path, escape(pattern).replace(/(\\\*)/g, `([^\\${file.pathSeparator()}/]*)`) + "$");
 }
 
 // replace globs in string
 export function replace(string: string, globs: string[]): string {
-    console.log("replace");
-    console.log("string:", string, globs);
-    console.log("globs:", globs);
     const cnt = count(string);
     let result = string;
     if (!cnt || globs.length === 0) {
