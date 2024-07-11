@@ -3,7 +3,7 @@ import { assert } from "https://deno.land/std@0.196.0/assert/mod.ts";
 import { assertThrowsAsync } from "https://deno.land/std@0.55.0/testing/asserts.ts";
 import * as layer from "../rules/layer.ts";
 
-describe("test the layer policy within ddd domains", async () => {
+describe("test the ddd layers complain layer dependencies", async () => {
   it("domains are closed", async () => {
     assert(
       await layer.directoryDependsOn(
