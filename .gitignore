@@ -5,3 +5,5 @@
 dist
 deno.lock
 node_modules
+npm/
+coverage/
