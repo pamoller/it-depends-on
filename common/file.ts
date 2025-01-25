@@ -1,7 +1,7 @@
 import { parseImports } from "npm:parse-imports@^2.1.0";
 
 function platform(): string {
-    return "linux";
+    return Deno.build.os;
 }
 
 export function dirname(path: string): string {
