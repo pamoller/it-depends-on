@@ -17,13 +17,23 @@ describe("test the ddd layers complain software dependencies", () => {
         "npm:mongodb^5*"
       ),
     );
+    await assertThrowsAsync(async () => {
+      await software.directoryDependsOn(
+        "./test/ddd/{common,business,collaboration}/infrastructure"
+      )
+    });
     assert(
       await software.directoryDependsOn(
         "./test/ddd/reporting/scripts",
         "https://deno.land/std@0.2*/*",
         "npm:postgres"
       ),
-    );    
+    );
+    await assertThrowsAsync(async () => {
+      await software.directoryDependsOn(
+        "./test/ddd/reporting/scripts"
+      )
+    });    
   });
   
   it("infrastructure is implemented by packages", async () => {

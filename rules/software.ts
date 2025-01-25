@@ -17,9 +17,9 @@ export async function directoryDependsOn(
   dir: string,
   ...dependencies: string[]
 ): Promise<boolean> {
-  if (dependencies.length === 0) {
+  /*if (dependencies.length === 0) {
     return true;
-  }
+  }*/
   await walk.onGlob(dir, async (dir: string) => {
     await walk.onDir(
       dir,
@@ -38,9 +38,9 @@ export async function fileDependsOn(
   path: string,
   ...dependencies: string[]
 ): Promise<boolean> {
-  if (dependencies.length === 0) {
+  /*if (dependencies.length === 0) {
     return true;
-  }
+  }*/
   specifier:
   for await (const specifier of specifiers(path, false)) {
     for (const dep of dependencies) {
