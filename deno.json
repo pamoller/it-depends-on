@@ -1,13 +1,10 @@
 {
   "name": "@pamoller/it-depends-on",
-  "version": "0.1.8",
+  "version": "0.1.11",
   "description": "helps unit testing your architecture",
   "exports": {
     "./layer": "./rules/layer.ts",
     "./software": "./rules/software.ts"
-  },
-  "imports": {
-    "@deno/dnt": "jsr:@deno/dnt@^0.41.2",
   },
   "tasks": {
     "test": "deno test --doc --allow-all --parallel --coverage --trace-leaks --clean test/test.*.ts it-depends-on.ts"
